@@ -80,7 +80,8 @@ app.patch("/posts/:id",(req,res)=>{
     let post = posts.find((p)=> id === p.id);
     post.content = newContent;
     console.log(post);
-    res.send("patch is working")
+    // res.send("patch is working")
+    res.redirect("/posts")
 });
 
 // 5 => mix of 4 and 5
