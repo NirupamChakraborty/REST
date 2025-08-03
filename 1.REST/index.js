@@ -43,7 +43,7 @@ let posts = [
 app.get("/posts", (req,res)=>{
     res.render("index.ejs", { posts });
 })
-
+// CREATE
 // 2
 app.get("/posts/new", (req,res)=>{
     res.render("new.ejs");
@@ -60,7 +60,7 @@ app.post("/posts",(req,res)=>{
 });
 
 // 3
-
+// READ
 app.get("/posts/:id",(req,res)=>{
     let {id}= req.params;
     console.log(id);
@@ -70,6 +70,7 @@ app.get("/posts/:id",(req,res)=>{
     res.render("show.ejs", {post})
 });
 
+// UPDATE
 // 4
 app.patch("/posts/:id",(req,res)=>{
     let {id}= req.params;
@@ -81,7 +82,7 @@ app.patch("/posts/:id",(req,res)=>{
     post.content = newContent;
     console.log(post);
     // res.send("patch is working")
-    res.redirect("/posts")
+    res.redirect("/posts");
 });
 
 // 5 => mix of 4 and 5
@@ -90,6 +91,13 @@ app.get("/posts/:id/edit",(req,res)=>{
     let post =posts.find((p)=> id === p.id);
     res.render("edit.ejs", {post});
     })    
+//DELETE
+// 6
+app.delete("/posts/:id",(req,res)=>{
+    let {id} = req.params;
+    posts =posts.filter((p)=> id !== p.id);
+    res.redirect("/posts");
+})
 
 
 app.listen(port,()=>{
