@@ -2,6 +2,15 @@ const express = require("express");
 const app = express();
 const port = 3000
 const path = require("path")
+const { v4: uuidv4 } = require('uuid');
+// uuidv4();
+// use uuidv4(); in place of id
+
+const methodOverride = require("method-override");
+
+ 
+// override with POST having ?_method=DELETE
+app.use(methodOverride("_method"));
 
 app.use(express.urlencoded({ extended: true }))
 
@@ -13,17 +22,17 @@ app.use(express.static(path.join(__dirname, "public")));
 
 let posts = [
     {
-        id:"1a",
+        id:uuidv4(),
         username: "Sonu",
         content: "I love coding"
     },
     {
-        id:"2b",
+        id:uuidv4(),
         username: "Monu",
         content: "I love technology"
     },
     {
-        id:"3c",
+        id:uuidv4(),
         username: "Aonu",
         content: "I love computer"
     },
@@ -43,7 +52,8 @@ app.get("/posts/new", (req,res)=>{
 app.post("/posts",(req,res)=>{
     // console.log(req.body);
     let {username, content}= req.body;
-    posts.push({username, content});
+    let id = uuidv4();
+    posts.push({id, username, content});
     // res.send("post req working")
     // redirect to /posts pagep
     res.redirect("/posts")
@@ -59,6 +69,26 @@ app.get("/posts/:id",(req,res)=>{
     // res.send("req working")
     res.render("show.ejs", {post})
 });
+
+// 4
+app.patch("/posts/:id",(req,res)=>{
+    let {id}= req.params;
+    console.log(id);
+    let newContent= req.body.content;
+    console.log(newContent);
+    //  to update the content 
+    let post = posts.find((p)=> id === p.id);
+    post.content = newContent;
+    console.log(post);
+    res.send("patch is working")
+});
+
+// 5 => mix of 4 and 5
+app.get("/posts/:id/edit",(req,res)=>{
+    let {id} = req.params;
+    let post =posts.find((p)=> id === p.id);
+    res.render("edit.ejs", {post});
+    })    
 
 
 app.listen(port,()=>{
