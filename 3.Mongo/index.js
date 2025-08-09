@@ -55,11 +55,51 @@ const User = mongoose.model("User", userSchema);
 // FIND
 // User.findOne({age:{$gt:95}}).then((res)=>{
     // we generally find using id
-    // User.findOne({_id:'68962ae65c1cf195997a269a'}).then((res)=>{
-    User.findById('68962ae65c1cf195997a269a').then((res)=>{
+// User.findOne({_id:'68962ae65c1cf195997a269a'}).then((res)=>{
+// User.findById('68962ae65c1cf195997a269a').then((res)=>{
 
-    console.log(res)
-    // console.log(res[0].name)
+//     console.log(res)
+//     // console.log(res[0].name)
 
-}).catch((err) => console.log(err)
-)
+// }).catch((err) => console.log(err)
+// )
+
+// UPDATE COMMAND no need for set operator
+// User.updateOne({name:"Aparna"}, {age:999}).then((res)=>{
+//     console.log(res)
+//     }).catch((err) => console.log(err)
+//     )
+
+// if we want to update and get the updated value 
+
+// User.findOneAndUpdate({name:"Aparna"}, {age:97}, {new: true})
+// .then((res)=>{
+//         console.log(res)
+// })
+// .catch((err) => console.log(err)
+//         )
+
+// DELETE 
+// delete one
+
+// User.deleteOne({name:"Aparna"})
+// .then((res)=>{
+//     console.log(res)
+// })
+
+
+
+
+// deletemany
+// User.deleteMany({age:99})
+// .then((res)=>{
+//     console.log(res)
+// })
+
+
+// findByIdAndDelete
+
+// User.findByIdAndDelete("68962ae65c1cf195997a269a")
+// .then((res)=>{
+//     console.log(res)
+// })
